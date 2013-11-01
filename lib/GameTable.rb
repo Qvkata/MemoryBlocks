@@ -63,7 +63,7 @@ class GameTable
   def set_blocks(blocks_id, images)
     blocks_id.each do |id|
       @blocks[id] = Block.new(@root, id, images.shift, @size)
-      @blocks[id].button.command = proc {block_function(id)}
+      @blocks[id].button.command = Proc.new { block_function(id) }
     end
   end
 
@@ -72,7 +72,7 @@ class GameTable
     if @click_counter == 1
       @blocks[id].open
       @open_block1 = id
-    elsif @click_counter == 2 and  @open_block1 == id
+    elsif @click_counter == 2 and @open_block1 == id
       @click_counter = 1
     elsif @click_counter == 2
       @blocks[id].open
@@ -92,11 +92,13 @@ class GameTable
         @score = @score + 1
         @label.set_score(@score)
       else
+        @score = @score - 0.5
+        @label.set_score(@score)
         @blocks[@open_block1].close
         @blocks[@open_block2].close
       end
       @click_counter = 0
-      Message.new('ok', 'info', 'Message', 'Congratulations! You won the game') if @score == (@size * @size) / 2
+      Message.new('ok', 'info', 'Message', 'Congratulations! You won the game') if @removed_blocks.size == @size * @size
     end
   end
 end

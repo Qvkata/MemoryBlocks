@@ -21,7 +21,7 @@ class Menu
     @file_menu.add(:command, :label => 'Load Game', :state => 'disabled')
     @file_menu.add(:command, :label => "Save Game", :state => 'disabled')
     @file_menu.add(:separator)
-    @file_menu.add(:command, :label => 'Exit', :command => proc { exit })
+    @file_menu.add(:command, :label => 'Exit', :command => Proc.new { exit })
   end
 
   def set_menu_bar(root)

@@ -49,10 +49,10 @@ class Application
 
   def set_menu
     @menu = Menu.new(ROOT_WINDOW)
-    @menu.new_game_menu.entryconfigure('Game 4x4', :command => proc{new_game(4)})
-    @menu.new_game_menu.entryconfigure('Game 6x6', :command => proc{new_game(6)})
-    @menu.file_menu.entryconfigure('Load Game', :command => proc{load_game})
-    @menu.file_menu.entryconfigure('Save Game', :command => proc{save_game})
+    @menu.new_game_menu.entryconfigure('Game 4x4', :command => Proc.new { new_game(4) })
+    @menu.new_game_menu.entryconfigure('Game 6x6', :command => Proc.new { new_game(6) })
+    @menu.file_menu.entryconfigure('Load Game', :command => Proc.new { load_game })
+    @menu.file_menu.entryconfigure('Save Game', :command => Proc.new { save_game })
     ROOT_WINDOW.menu(@menu.bar)
   end
 end
